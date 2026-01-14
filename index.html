@@ -42,7 +42,15 @@
         opacity: 1;
         transform: translateY(0);
       }
-      /* Ensure tap targets are accessible */
+
+      /* Global Focus States */
+      :focus-visible {
+        outline: 3px solid var(--medical-blue);
+        outline-offset: 2px;
+        border-radius: 4px;
+      }
+
+      /* Accessibility: Tap Targets */
       button, a {
         min-height: 48px;
         min-width: 48px;
@@ -50,6 +58,7 @@
         align-items: center;
         justify-content: center;
       }
+
       .custom-scrollbar::-webkit-scrollbar {
         width: 6px;
       }

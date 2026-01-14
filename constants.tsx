@@ -13,7 +13,7 @@ import { Service, TeamMember, Testimonial } from './types';
 export const CLINIC_NAME = "Browne Clinic";
 export const CLINIC_LOCATION = "Johnsonville, Pepper Wulu Market, Montserrado County, Liberia";
 export const CLINIC_LANDMARK = "Opposite the orange Tawar, adjacent Browne Clinic";
-export const PHONE_NUMBERS = ["0776237391", "0880765900"];
+export const PHONE_NUMBERS = ["0775829276"];
 export const CLINIC_EMAIL = "info@browneclinic.com";
 
 // New Brand Color: Medical Blue (#0057B7)
@@ -66,22 +66,16 @@ export const SERVICES: (Service & { details: string })[] = [
 
 export const TEAM: TeamMember[] = [
   {
-    name: "Dr. Samuel Browne",
-    role: "Medical Director",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&fm=webp&q=80&w=400&h=500",
-    bio: "Over 15 years of experience serving communities in Montserrado County."
+    name: "Yamah Cheales Browne",
+    role: "Administrator",
+    image: "", 
+    bio: "Dedicated to the smooth operations of Browne Clinic and ensuring every patient receives compassionate care."
   },
   {
-    name: "Nurse Sarah Johnson",
-    role: "Senior Midwife",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&fm=webp&q=80&w=400&h=500",
-    bio: "Expert in maternal health with a passion for newborn care and education."
-  },
-  {
-    name: "Mr. David Kolleh",
-    role: "Lab Lead",
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&fm=webp&q=80&w=400&h=500",
-    bio: "Ensuring accurate and timely diagnostic results for our patients."
+    name: "Agatha Parsons",
+    role: "OTC",
+    image: "", 
+    bio: "Expertly handling patient needs and providing essential health guidance to our local community."
   }
 ];
 

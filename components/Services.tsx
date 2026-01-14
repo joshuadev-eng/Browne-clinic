@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { SERVICES, ICON_MAP } from '../constants';
 import { ChevronDown, Plus, Minus } from 'lucide-react';
@@ -25,6 +24,8 @@ const Services: React.FC = () => {
           {SERVICES.map((service) => {
             const IconComponent = ICON_MAP[service.icon];
             const isActive = activeId === service.id;
+            const panelId = `panel-${service.id}`;
+            const buttonId = `button-${service.id}`;
             
             return (
               <div 
@@ -34,25 +35,32 @@ const Services: React.FC = () => {
                 }`}
               >
                 <button 
+                  id={buttonId}
                   onClick={() => toggleAccordion(service.id)}
-                  className="w-full p-8 text-left flex items-start gap-6 group"
+                  className="w-full p-8 text-left flex items-start gap-6 group focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-[#0057B7] outline-none"
                   aria-expanded={isActive}
+                  aria-controls={panelId}
                 >
                   <div className={`w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0 transition-colors ${
                     isActive ? 'bg-[#0057B7] text-white' : 'bg-blue-50 text-[#0057B7] group-hover:bg-blue-100'
-                  }`}>
+                  }`} aria-hidden="true">
                     <IconComponent className="w-7 h-7" />
                   </div>
                   <div className="flex-grow pt-1">
                     <h4 className="text-xl font-bold text-slate-900 mb-2">{service.title}</h4>
                     <p className="text-slate-500 line-clamp-2">{service.description}</p>
                   </div>
-                  <div className={`mt-2 p-2 rounded-full transition-colors ${isActive ? 'bg-[#0057B7] text-white' : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200'}`}>
+                  <div className={`mt-2 p-2 rounded-full transition-colors ${isActive ? 'bg-[#0057B7] text-white' : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200'}`} aria-hidden="true">
                     {isActive ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
                   </div>
                 </button>
                 
-                <div className={`transition-all duration-300 ease-in-out ${isActive ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+                <div 
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={buttonId}
+                  className={`transition-all duration-300 ease-in-out ${isActive ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}
+                >
                   <div className="px-8 pb-8 pt-2 border-t border-slate-50">
                     <div className="bg-slate-50 rounded-2xl p-6">
                       <p className="text-slate-700 leading-relaxed text-lg mb-6">
@@ -60,10 +68,10 @@ const Services: React.FC = () => {
                       </p>
                       <a 
                         href="#contact" 
-                        className="inline-flex items-center font-bold text-[#0057B7] hover:underline"
+                        className="inline-flex items-center font-bold text-[#0057B7] hover:underline focus-visible:ring-2 focus-visible:ring-[#0057B7] rounded p-1 outline-none"
                       >
                         Book an appointment for this service
-                        <ChevronDown className="w-4 h-4 ml-1 -rotate-90" />
+                        <ChevronDown className="w-4 h-4 ml-1 -rotate-90" aria-hidden="true" />
                       </a>
                     </div>
                   </div>

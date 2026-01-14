@@ -21,7 +21,7 @@ export class HealthAssistantService {
         1. Answer basic questions about the clinic (location, hours, services).
         2. Provide general health information, but ALWAYS advise talking to a doctor at our clinic for diagnosis.
         3. Be brief and use simple language suitable for the local Johnsonville community.
-        4. If someone sounds like they have an emergency, tell them to visit the clinic immediately or call 0776237391.
+        4. If someone sounds like they have an emergency, tell them to visit the clinic immediately or call 0775829276.
         
         Clinic Hours: Mon-Fri 8am-5pm, Sat 8am-12pm.
       `;
@@ -38,7 +38,7 @@ export class HealthAssistantService {
       return response.text || "I'm sorry, I couldn't process that. Please visit us at the clinic or call our numbers directly.";
     } catch (error) {
       console.error("Gemini Error:", error);
-      return "I am currently having trouble connecting. Please call us at 0776237391 for immediate assistance.";
+      return "I am currently having trouble connecting. Please call us at 0775829276 for immediate assistance.";
     }
   }
 }

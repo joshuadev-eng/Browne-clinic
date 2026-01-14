@@ -75,7 +75,7 @@ const Hero: React.FC<HeroProps> = ({ onScheduleClick }) => {
                 className="rounded-[40px] shadow-2xl w-full h-[600px] object-cover border-8 border-white"
               />
               <div className="absolute -bottom-10 -left-10 bg-white p-8 rounded-3xl shadow-2xl border border-slate-100 max-w-[280px]">
-                <div className="flex items-center space-x-2 mb-4">
+                <div className="flex items-center space-x-2 mb-2">
                   <div className="flex -space-x-3">
                     {[1,2,3].map(i => (
                       <img key={i} src={`https://picsum.photos/seed/pat${i}/48/48`} className="w-10 h-10 rounded-full border-2 border-white" />
@@ -83,7 +83,6 @@ const Hero: React.FC<HeroProps> = ({ onScheduleClick }) => {
                   </div>
                   <span className="text-xs font-bold text-slate-500 uppercase">Trusted by locals</span>
                 </div>
-                <h4 className="text-xl font-bold text-slate-900 leading-tight">Expert Doctors and Loving Staff</h4>
               </div>
             </div>
             {/* Decorative dots */}

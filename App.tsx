@@ -77,7 +77,7 @@ const App: React.FC = () => {
                 Schedule Checkup
               </button>
               <a 
-                href="tel:0776237391"
+                href="tel:0775829276"
                 className="bg-transparent text-white border-2 border-white/30 px-12 py-5 rounded-2xl font-bold text-xl hover:bg-white/10 transition-all flex items-center justify-center"
               >
                 Call Clinic Now
