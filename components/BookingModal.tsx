@@ -1,0 +1,148 @@
+
+import React, { useState } from 'react';
+import { X, Calendar, User, Phone, CheckCircle } from 'lucide-react';
+import { SERVICES } from '../constants';
+import { BookingStep } from '../types';
+
+interface BookingModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose }) => {
+  const [step, setStep] = useState<BookingStep>(BookingStep.INITIAL);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    service: '',
+    date: ''
+  });
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setStep(BookingStep.CONFIRMATION);
+  };
+
+  const renderContent = () => {
+    switch (step) {
+      case BookingStep.CONFIRMATION:
+        return (
+          <div className="text-center py-12">
+            <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="w-12 h-12" />
+            </div>
+            <h3 className="text-2xl font-bold text-slate-900 mb-2">Request Received!</h3>
+            <p className="text-slate-600 mb-8 px-6">
+              Thank you, {formData.name}. We will call you at {formData.phone} shortly to confirm your appointment for {formData.date}.
+            </p>
+            <button 
+              onClick={onClose}
+              className="w-full py-4 bg-emerald-600 text-white rounded-xl font-bold"
+            >
+              Close Window
+            </button>
+          </div>
+        );
+
+      default:
+        return (
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="space-y-4">
+              <div>
+                <label className="block text-sm font-bold text-slate-700 mb-1">Full Name</label>
+                <div className="relative">
+                  <User className="absolute left-3 top-3.5 w-5 h-5 text-slate-400" />
+                  <input 
+                    required
+                    type="text" 
+                    placeholder="Enter your name"
+                    className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    value={formData.name}
+                    onChange={e => setFormData({...formData, name: e.target.value})}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-slate-700 mb-1">Phone Number</label>
+                <div className="relative">
+                  <Phone className="absolute left-3 top-3.5 w-5 h-5 text-slate-400" />
+                  <input 
+                    required
+                    type="tel" 
+                    placeholder="077xxxxxxx"
+                    className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    value={formData.phone}
+                    onChange={e => setFormData({...formData, phone: e.target.value})}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-slate-700 mb-1">Service Needed</label>
+                <select 
+                  required
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none appearance-none"
+                  value={formData.service}
+                  onChange={e => setFormData({...formData, service: e.target.value})}
+                >
+                  <option value="">Select a service</option>
+                  {SERVICES.map(s => (
+                    <option key={s.id} value={s.id}>{s.title}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-bold text-slate-700 mb-1">Preferred Date</label>
+                <div className="relative">
+                  <Calendar className="absolute left-3 top-3.5 w-5 h-5 text-slate-400" />
+                  <input 
+                    required
+                    type="date" 
+                    className="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none"
+                    value={formData.date}
+                    onChange={e => setFormData({...formData, date: e.target.value})}
+                  />
+                </div>
+              </div>
+            </div>
+
+            <button 
+              type="submit"
+              className="w-full py-4 bg-emerald-600 text-white rounded-xl font-bold text-lg hover:bg-emerald-700 transition-all shadow-md active:scale-95"
+            >
+              Request Appointment
+            </button>
+            <p className="text-center text-xs text-slate-500">
+              By submitting, you agree to be contacted via phone.
+            </p>
+          </form>
+        );
+    }
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center px-4">
+      <div 
+        className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" 
+        onClick={onClose}
+      />
+      <div className="bg-white rounded-3xl w-full max-w-lg relative z-10 overflow-hidden shadow-2xl animate-in zoom-in duration-200">
+        <div className="p-8 border-b border-slate-100 flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-slate-900">Book Appointment</h2>
+          <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-full text-slate-500">
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+        <div className="p-8">
+          {renderContent()}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default BookingModal;
