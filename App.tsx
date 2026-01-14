@@ -9,10 +9,11 @@ import BookingModal from './components/BookingModal';
 import GeminiAssistant from './components/GeminiAssistant';
 import FloatingActionButton from './components/FloatingActionButton';
 import { TESTIMONIALS } from './constants';
-import { Quote, Heart } from 'lucide-react';
+import { Quote, Heart, ArrowUp } from 'lucide-react';
 
 const App: React.FC = () => {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
   useEffect(() => {
     // Intersection Observer for fade-in animations
@@ -30,11 +31,24 @@ const App: React.FC = () => {
     const reveals = document.querySelectorAll('.reveal');
     reveals.forEach((el) => observer.observe(el));
 
-    return () => observer.disconnect();
+    // Scroll progress handler
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 1000);
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden">
+    <div className="min-h-screen bg-white overflow-x-hidden selection:bg-[#0057B7] selection:text-white">
       <Header />
       
       <main>
@@ -84,15 +98,15 @@ const App: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               {TESTIMONIALS.map((t, i) => (
-                <div key={i} className="bg-white p-12 rounded-[48px] text-left relative shadow-xl shadow-slate-200/50 border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
-                  <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8">
+                <div key={i} className="group bg-white p-12 rounded-[48px] text-left relative shadow-xl shadow-slate-200/50 border border-slate-100 hover:-translate-y-2 transition-transform duration-300">
+                  <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#0057B7]/10 transition-colors">
                     <Quote className="w-8 h-8 text-[#0057B7]" />
                   </div>
                   <p className="text-2xl text-slate-700 italic font-medium mb-10 leading-relaxed">
                     "{t.text}"
                   </p>
                   <div className="flex items-center space-x-4 border-t border-slate-50 pt-8">
-                    <div className="w-14 h-14 bg-slate-200 rounded-full flex items-center justify-center font-bold text-slate-400 text-xl">
+                    <div className="w-14 h-14 bg-slate-100 rounded-full flex items-center justify-center font-bold text-slate-400 text-xl border border-slate-200">
                       {t.author[0]}
                     </div>
                     <div>
@@ -109,15 +123,15 @@ const App: React.FC = () => {
               <p className="text-slate-400 font-bold uppercase tracking-[0.3em] text-xs mb-12">Proud Partners in Public Health</p>
               <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
                  <div className="flex flex-col items-center">
-                    <div className="w-16 h-16 bg-slate-300 rounded-full mb-4"></div>
+                    <img src="https://picsum.photos/seed/moh/64/64" className="w-16 h-16 rounded-full mb-4 bg-slate-300" alt="MOH" />
                     <span className="font-bold text-slate-600">MOH Liberia</span>
                  </div>
                  <div className="flex flex-col items-center">
-                    <div className="w-16 h-16 bg-slate-300 rounded-full mb-4"></div>
+                    <img src="https://picsum.photos/seed/who/64/64" className="w-16 h-16 rounded-full mb-4 bg-slate-300" alt="WHO" />
                     <span className="font-bold text-slate-600">WHO Africa</span>
                  </div>
                  <div className="flex flex-col items-center">
-                    <div className="w-16 h-16 bg-slate-300 rounded-full mb-4"></div>
+                    <img src="https://picsum.photos/seed/unicef/64/64" className="w-16 h-16 rounded-full mb-4 bg-slate-300" alt="UNICEF" />
                     <span className="font-bold text-slate-600">UNICEF Partner</span>
                  </div>
               </div>
@@ -135,6 +149,17 @@ const App: React.FC = () => {
       
       <GeminiAssistant />
       <FloatingActionButton />
+
+      {/* Back to Top Button */}
+      {showScrollTop && (
+        <button 
+          onClick={scrollToTop}
+          className="fixed bottom-24 right-6 p-4 bg-white text-[#0057B7] border border-slate-100 rounded-full shadow-2xl hover:bg-[#0057B7] hover:text-white transition-all z-[85] animate-in slide-in-from-bottom-5"
+          aria-label="Back to Top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 };

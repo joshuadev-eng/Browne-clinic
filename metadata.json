@@ -2,6 +2,8 @@
   "name": "Browne Clinic - Johnsonville",
   "description": "Professional, patient-centric healthcare portal for the community of Johnsonville, Liberia. Mobile-first design for accessible medical services.",
   "requestFramePermissions": [
-    "geolocation"
+    "geolocation",
+    "camera",
+    "microphone"
   ]
 }

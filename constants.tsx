@@ -68,19 +68,19 @@ export const TEAM: TeamMember[] = [
   {
     name: "Dr. Samuel Browne",
     role: "Medical Director",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=400&h=500",
+    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&fm=webp&q=80&w=400&h=500",
     bio: "Over 15 years of experience serving communities in Montserrado County."
   },
   {
     name: "Nurse Sarah Johnson",
     role: "Senior Midwife",
-    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&q=80&w=400&h=500",
+    image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&fm=webp&q=80&w=400&h=500",
     bio: "Expert in maternal health with a passion for newborn care and education."
   },
   {
     name: "Mr. David Kolleh",
     role: "Lab Lead",
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400&h=500",
+    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&fm=webp&q=80&w=400&h=500",
     bio: "Ensuring accurate and timely diagnostic results for our patients."
   }
 ];
